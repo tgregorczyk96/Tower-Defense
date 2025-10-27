@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mittelalter Tower Defense</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Mittelalter Tower Defense</h1>
+    <div class="hud">
+      <div>Gold: <span id="gold">100</span> 🪙</div>
+      <div>Leben: <span id="lives">20</span> ❤️</div>
+      <div>Welle: <span id="wave">0</span></div>
+      <div>
+        <button id="startWaveBtn">Welle starten</button>
+        <button id="nextWaveBtn" disabled>Nächste Welle</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <aside class="sidebar">
+      <h2>Bauen</h2>
+
+      <div class="tower-card" data-type="archer" data-cost="70">
+        <strong>Schütze (Archer)</strong>
+        <div>Reichweite: 180px</div>
+        <div>Schaden: 18 (physisch)</div>
+        <div>Feuerrate: 0.55s</div>
+        <div>Kosten: 70 🪙</div>
+        <button class="buy-btn">Kaufen</button>
+      </div>
+
+      <div class="tower-card" data-type="mage" data-cost="80">
+        <strong>Magier (Mage)</strong>
+        <div>Reichweite: 140px</div>
+        <div>Schaden: 30 (magisch)</div>
+        <div>Feuerrate: 0.9s</div>
+        <div>Kosten: 80 🪙</div>
+        <button class="buy-btn">Kaufen</button>
+      </div>
+
+      <div class="tower-card" data-type="guard" data-cost="65">
+        <strong>Nahkämpfer (Guard)</strong>
+        <div>Reichweite: 90px</div>
+        <div>Schaden: 16 (physisch)</div>
+        <div>Feuerrate: 0.75s</div>
+        <div>Kosten: 65 🪙</div>
+        <button class="buy-btn">Kaufen</button>
+      </div>
+
+      <hr/>
+      <h3>Inspector</h3>
+      <div id="inspector" class="inspector">
+        <h4 id="insp-title">Turm-Info</h4>
+        <div id="insp-body">
+          <p>Kein Turm ausgewählt.</p>
+        </div>
+      </div>
+
+      <hr/>
+      <h3>Tipps</h3>
+      <ul>
+        <li>Wähle links einen Turm ("Kaufen") und klicke danach auf ein freies Feld.</li>
+        <li>Klicke auf einen platzierten Turm, um ihn auszuwählen und Upgrades zu kaufen.</li>
+        <li>Türme können nicht auf dem Weg gebaut werden.</li>
+      </ul>
+    </aside>
+
+    <section class="game-area">
+      <canvas id="gameCanvas" width="900" height="600"></canvas>
+    </section>
+  </main>
+
+  <footer>
+    <small>Ein mittelalterliches Tower Defense — gebaut mit HTML, CSS & JavaScript.</small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
