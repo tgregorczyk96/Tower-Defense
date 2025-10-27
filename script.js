@@ -316,6 +316,7 @@
     ctx.restore();
   }
   function draw(){
+  if(!ctx) return;
     ctx.clearRect(0,0,canvas.width,canvas.height);
     drawGrid(); drawPath();
     // baubare Felder schattieren
@@ -368,6 +369,7 @@
 
   // --- Inspector ---
   function renderInspector(){
+  if(!hasInspector) return;
     const inspTitleEl=document.getElementById('insp-title');
     const inspBodyEl=document.getElementById('insp-body');
     const t = state.selectedTower;
@@ -487,6 +489,7 @@ function normalizeTowerType(t){
     // Delegated click for buy buttons
     document.addEventListener('click', (ev)=>{
       const btn = ev.target.closest && ev.target.closest('.buy-btn');
+  if(btn) console.log('[TD] buy click detected');
       if(!btn) return;
       const card = btn.closest('.tower-card'); if(!card) return;
       const rawType = card.dataset.type;
@@ -539,3 +542,26 @@ function normalizeTowerType(t){
   else init();
 
 })();
+
+// --- Boot / DOM Ready ---
+function attachHUD(){
+  if(HUD.startWaveBtn) HUD.startWaveBtn.addEventListener('click', startWave);
+  if(HUD.nextWaveBtn) HUD.nextWaveBtn.addEventListener('click', startWave);
+}
+
+function boot(){
+  console.log('[TD] boot');
+  // rebind canvas & ctx in case script loaded before DOM
+  canvas = document.getElementById('gameCanvas');
+  ctx = canvas ? canvas.getContext('2d') : null;
+  attachHUD();
+  updateHUD();
+  renderInspector();
+  requestAnimationFrame(gameLoop);
+}
+
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', boot);
+} else {
+  boot();
+}
